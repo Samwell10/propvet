@@ -115,7 +115,7 @@ const mockRequestData = {
   }
 }
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   return Object.keys(mockRequestData).map((id) => ({
     id,
   }))
