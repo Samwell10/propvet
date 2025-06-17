@@ -115,20 +115,22 @@ const mockRequestData = {
   }
 }
 
-export function generateStaticParams() {
-  return Object.keys(mockRequestData).map((id) => ({ id }))
+//  Next.js will call this to statically generate all pages
+export async function generateStaticParams() {
+  return Object.keys(mockRequestData).map((id) => ({
+    id,
+  }))
 }
 
-type Props = {
+//  Use the correct signature for App Router dynamic route pages
+export default function AdminRequestDetail({
+  params,
+}: {
   params: { id: string }
-}
-
-export default function AdminRequestDetail({ params }: Props) {
+}) {
   const requestData = mockRequestData[params.id as keyof typeof mockRequestData]
 
-  if (!requestData) {
-    notFound()
-  }
+  if (!requestData) notFound()
 
   return <AdminRequestDetailClient requestData={requestData} />
 }
