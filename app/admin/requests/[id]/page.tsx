@@ -116,18 +116,14 @@ const mockRequestData = {
 }
 
 export function generateStaticParams() {
-  return Object.keys(mockRequestData).map((id) => ({
-    id,
-  }))
+  return Object.keys(mockRequestData).map((id) => ({ id }))
 }
 
-interface AdminRequestDetailProps {
-  params: {
-    id: string
-  }
+type Props = {
+  params: { id: string }
 }
 
-export default function AdminRequestDetail({ params }: AdminRequestDetailProps) {
+export default function AdminRequestDetail({ params }: Props) {
   const requestData = mockRequestData[params.id as keyof typeof mockRequestData]
 
   if (!requestData) {
